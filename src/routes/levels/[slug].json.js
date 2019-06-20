@@ -1,8 +1,8 @@
-import posts from './_posts.js';
+import levels from './_levels.js';
 
 const lookup = new Map();
-posts.forEach(post => {
-	lookup.set(post.slug, JSON.stringify(post));
+levels.forEach(level => {
+	lookup.set(level.slug, JSON.stringify(level));
 });
 
 export function get(req, res, next) {

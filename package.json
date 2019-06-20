@@ -1,6 +1,6 @@
 {
   "name": "sokoban",
-  "description": "Sokoban game built on top of Svelte & Sapper.",
+  "description": "Sokoban game built on top of Svelte and Sapper.",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
@@ -9,28 +9,40 @@
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "test": "run-p --race dev cy:run"
+    "test": "run-p --race dev cy:run",
+    "watch:tailwind": "postcss static/tailwind.css -o static/index.css -w"
   },
   "dependencies": {
+    "@tailwindcss/custom-forms": "^0.1.4",
     "compression": "^1.7.1",
-    "polka": "^0.5.0",
-    "sirv": "^0.4.0"
+    "hotkeys-js": "^3.6.11",
+    "svelte-extras": "^2.0.2"
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5",
-    "sapper": "^0.27.0",
-    "svelte": "^3.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "rollup": "^1.0.0",
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "humanize-string": "^2.1.0",
+    "npm-run-all": "^4.1.5",
+    "polka": "^0.5.2",
+    "postcss-cli": "^6.1.2",
+    "rollup": "^1.15.6",
     "rollup-plugin-babel": "^4.0.2",
     "rollup-plugin-commonjs": "^9.1.6",
+    "rollup-plugin-import-resolver": "^1.0.4",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-svelte": "^5.0.1",
-    "rollup-plugin-terser": "^4.0.4"
+    "rollup-plugin-svelte": "^5.1.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "sapper": "^0.27.4",
+    "sirv": "^0.4.2",
+    "structurae": "^1.3.0",
+    "svelte": "^3.5.2",
+    "tailwindcss": "^1.0.4",
+    "tailwindcss-grid": "^1.2.1",
+    "tailwindcss-scrims": "^1.0.0"
   }
 }

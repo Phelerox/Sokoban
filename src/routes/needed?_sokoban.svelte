@@ -5,11 +5,11 @@
 	}
 
 	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
+    font-size: 2em;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin: 0 0 0.5em 0;
+}
 
 	figure {
 		margin: 0 0 1em 0;
