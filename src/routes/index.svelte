@@ -25,28 +25,33 @@
 		}
 	}
 
-	.batman {
+	.green {
+		background-color: #89c7a1;
+	}
+
+	.silver {
 		background-color: #d7d9f2;
 	}
 
-	.flash {
+	.yellow {
 		background-color: #ffe8d4;
 	}
 
 	caption {
 		padding: 8px;
 		caption-side: bottom;
+		font: italic smaller sans-serif;
 	}
 
 	table {
 		width: 100%;
 		max-width: 400px;
 		margin: 0 0 1em 0;
-		border-collapse: collapse;
-		border: 2px solid rgb(100, 100, 100);
+		/* border-collapse: collapse;
+		border: 2px solid rgb(100, 100, 100); */
 		letter-spacing: 1px;
 		font-family: sans-serif;
-		font-size: .7rem;
+		font-size: 1rem;
 	}
 
 	td,
@@ -59,28 +64,34 @@
 			text-align: center;
 	}
 
+	td a {
+		color: rgb(11, 71, 68);
+		font-weight: 500;
+	}
 
-	/* figure {
+
+	figure {
     border: thin #c0c0c0 solid;
     display: flex;
     flex-flow: column;
     padding: 5px;
-    max-width: 220px;
+    max-width: 300px;
     margin: auto;
 }
 
 img {
-    max-width: 220px;
+    max-width: 300px;
     max-height: 150px;
 }
 
 figcaption {
     background-color: #222;
     color: #fff;
-    font: italic smaller sans-serif;
+		font: italic smaller sans-serif;
+		font-size: 1rem;
     padding: 3px;
     text-align: center;
-} */
+}
 </style>
 
 <svelte:head>
@@ -90,27 +101,19 @@ figcaption {
 <h1>Sokoban</h1>
 
 <figure>
-	<figcaption>Level 1</figcaption>
+	<figcaption>Levels</figcaption>
 	<table>
-    <caption>Moves: x</caption>
+    <caption>What are you waiting for?</caption>
     <colgroup>
-        <col>
-        <col span="2" class="batman">
-        <col span="2" class="flash" >
+        <col class="green">
+        <col class="silver">
+        <col class="yellow" >
     </colgroup>
     <tr>
-        <td> </td>
-        <!-- <th scope="col">Batman</th>
-        <th scope="col">Robin</th>
-        <th scope="col">The Flash</th>
-        <th scope="col">Kid Flash</th> -->
-    </tr>
-    <tr>
         <!-- <th scope="row"></th> -->
-        <td>Smarts</td>
-        <td>Dex, acrobat</td>
-        <td>Super speed</td>
-        <td>Super speed</td>
+        <td><a href="levels/level-1">Level 1</a></td>
+        <td><a href="levels/level-2">Level 2</a></td>
+        <td><a href="levels/level-3">Level 3</a></td>
     </tr>
 	</table>
 </figure>

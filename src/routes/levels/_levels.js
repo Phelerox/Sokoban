@@ -25,6 +25,7 @@ const Entities = {
 const levels = [
 	{
     slug: 'level-1',
+    theme: '1',
     width: 19,
     height: 16,
     mapGrid: [ //Why was this an array of arrays of 1-length arrays containing the string? The innermost array seems very superflous so I'm removing it.
@@ -38,8 +39,8 @@ const levels = [
     [' ', ' ', 'W', ' ', ' ', 'B', ' ', 'B', ' ', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ['W', 'W', 'W', ' ', 'W', ' ', 'W', 'W', ' ', 'W', ' ', ' ', ' ', 'W', 'W', 'W', 'W', 'W', 'W'],
     ['W', ' ', ' ', ' ', 'W', ' ', 'W', 'W', ' ', 'W', 'W', 'W', 'W', 'W', ' ', ' ', 'G', 'G', 'W'],
-    ['W', ' ', 'B', ' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B', ' ', 'G', 'G', 'W'],
-    ['W', 'W', 'W', 'W', 'W', ' ', 'W', 'W', 'W', ' ', 'W', 'P', 'W', 'W', ' ', ' ', 'G', 'G', 'W'],
+    ['W', ' ', ' ', ' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'G', 'G', 'W'],
+    ['W', 'W', 'W', 'W', 'W', ' ', 'W', 'W', 'W', 'B', 'W', 'P', 'W', 'W', ' ', ' ', 'G', 'G', 'W'],
     [' ', ' ', ' ', ' ', 'W', ' ', ' ', ' ', ' ', ' ', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
     [' ', ' ', ' ', ' ', 'W', 'W', 'W', 'W', 'W', 'W', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -48,6 +49,7 @@ const levels = [
 },
 {
     slug: 'level-2',
+    theme: '2',
     width: 19,
     height: 16,
     mapGrid: [
@@ -71,6 +73,7 @@ const levels = [
 },
 {
     slug: 'level-3',
+    theme: '3',
     width: 19,
     height: 16,
     mapGrid: [
@@ -81,10 +84,10 @@ const levels = [
     [' ', ' ', ' ', ' ', 'W', ' ', ' ', ' ', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', 'W', 'B', ' ', ' ', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', 'W', 'W', 'W', ' ', ' ', 'B', 'W', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', 'W', ' ', ' ', 'B', ' ', 'B', ' ', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', 'W', ' ', ' ', 'B', ' ', ' ', ' ', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ['W', 'W', 'W', ' ', 'W', ' ', 'W', 'W', ' ', 'W', ' ', ' ', ' ', 'W', 'W', 'W', 'W', 'W', 'W'],
-    ['W', ' ', ' ', ' ', 'W', ' ', 'W', 'W', ' ', 'W', 'W', 'W', 'W', 'W', ' ', ' ', 'G', 'G', 'W'],
-    ['W', ' ', 'B', ' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', 'B', ' ', ' ', 'B', ' ', 'G', 'G', 'W'],
+    ['W', ' ', ' ', ' ', 'W', ' ', 'W', 'W', 'B', 'W', 'W', 'W', 'W', 'W', ' ', ' ', 'G', 'G', 'W'],
+    ['W', ' ', 'B', ' ', ' ', 'B', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'G', 'G', 'W'],
     ['W', 'W', 'W', 'W', 'W', ' ', 'W', 'W', 'W', ' ', 'W', 'P', 'W', 'W', ' ', ' ', 'G', 'G', 'W'],
     [' ', ' ', ' ', ' ', 'W', ' ', ' ', ' ', ' ', ' ', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
     [' ', ' ', ' ', ' ', 'W', 'W', 'W', 'W', 'W', 'W', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -93,9 +96,17 @@ const levels = [
     ]
 },
 ];
-levels.forEach(level => {
+let previous = undefined;
+levels.reverse().forEach(level => {
     level.name = humanizeString(level.slug);
+    if (previous) {
+        level.next = previous;
+    } else {
+        level.isLast = true;
+    }
+    previous = level.slug;
 });
+levels.reverse();
 
 var randomLevel = levels[Math.floor(Math.random() * levels.length)];
 export default levels;

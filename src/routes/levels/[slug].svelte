@@ -26,74 +26,46 @@
 		In this page, Svelte can't know which elements are
 		going to appear inside the {{{level.html}}} block,
 		so we have to use the :global(...) modifier to target
-		all elements inside .game_container
+		all elements inside
 	*/
- 
 
-	.game_container :global(h2) {
-		font-size: 1.4em;
-		font-weight: 500;
-	}
-
-	.game_container :global(pre) {
-		background-color: #f9f9f9;
-		box-shadow: inset 1px 1px 5px rgba(0,0,0,0.05);
-		padding: 0.5em;
-		border-radius: 2px;
-		overflow-x: auto;
-	}
-
-	.game_container :global(pre) :global(code) {
-		background-color: transparent;
-		padding: 0;
-	}
-
-	.game_container :global(ul) {
-		line-height: 1.5;
-	}
-
-	.game_container :global(li) {
-		margin: 0 0 0.5em 0;
-	}
+	
 	.game_container {
     display: grid;
-    width: 100%;
-    height: 100%;
+		/* width: 80vmin;
+		height: 80vmin; */
     grid-template-areas: "header header header"
-    "left main right"
+    "main main main"
     "footer footer footer";
-    grid-template-columns: 120px 4fr 1fr;
-    grid-template-rows: 160px 1fr 80px;
-  }
-  :global(table) {
-    border: 1px dashed #888;
+    grid-template-columns: 0px auto 0px;
+    grid-template-rows:4em auto 5em;
   }
 
   .header {
     grid-area: header;
   }
-  .left {
-    grid-area: left;
-  }
-  :global(table){
+  :global(#sokoban){
     grid-area: main;
-  }
-  .right {
-    grid-area: right;
   }
   .footer {
     grid-area: footer;
   }
 
+	h3 {
+		margin: 0.5em auto;
+		/* padding-bottom: 0.8em; */
+	}
+
 </style>
 
 <svelte:head>
-	<title>{level.name}</title>
+	<!-- <title>{level.name}</title> -->
 </svelte:head>
 
-<h1>{level.name}</h1>
-
-<div class='game_container'>
-	<Sokoban {mapGrid}/>
-	<button class="footer m-5 p-2 bg-black text-white">boop</button>
+<div class='game_container mx-auto'>
+	<!-- <h3 class="header">{level.name}</h3> -->
+	<Sokoban {level} {mapGrid}/>
+	{#if level.next != undefined}
+		<div class="footer my-5 mx-auto"><a rel="prefetch" href="levels/{level.next}"><button class="p-2 bg-black text-white">Next Level</button></a></div>
+	{/if}
 </div>
