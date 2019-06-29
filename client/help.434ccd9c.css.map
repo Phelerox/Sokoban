@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "help.434ccd9c.css",
+  "sources": [
+    "../../../../../../src/routes/help.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n\n</script>\n\n<style>\nh1, p {\n    text-align: center;\n    margin: 0 auto;\n}\n\nh1 {\n    font-size: 2em;\n    text-transform: capitalize;\n    font-weight: 700;\n    margin: 0 0 0.5em 0;\n}\ndetails {\n    border: 1px solid #aaa;\n    border-radius: 4px;\n    padding: .5em .5em 0;\n    margin-bottom: 1rem;\n}\ndetails[open] {\n    padding: .5em;\n}\n\ndetails[open] summary {\n    border-bottom: 1px solid #aaa;\n    margin-bottom: .5em;\n}\n\ndetails[open] p {\n    padding: 0px 1rem;\n}\n\nsummary {\n    font-weight: bold;\n    margin: -.5em -.5em 0;\n    padding: .5em;\n}\n</style>\n\n\n<svelte:head>\n\t<title>Help</title>\n</svelte:head>\n\n<h1>Help</h1>\n<article class=\"brightness-120\">\n<details class=\"blur-background\" open><summary>Game Objective</summary>\n<p>Push the crates to the marked spots.</p></details>\n<details class=\"blur-background\"><summary>Controls</summary>\n<span><small><strong>Movement:</strong></small><p>Arrow keys.</p></span></details>\n</article>\n"
+  ],
+  "names": [],
+  "mappings": "AAKA,iBAAE,CAAE,CAAC,eAAC,CAAC,AACH,UAAU,CAAE,MAAM,CAClB,MAAM,CAAE,CAAC,CAAC,IAAI,AAClB,CAAC,AAED,EAAE,eAAC,CAAC,AACA,SAAS,CAAE,GAAG,CACd,cAAc,CAAE,UAAU,CAC1B,WAAW,CAAE,GAAG,CAChB,MAAM,CAAE,CAAC,CAAC,CAAC,CAAC,KAAK,CAAC,CAAC,AACvB,CAAC,AACD,OAAO,eAAC,CAAC,AACL,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,IAAI,CACtB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,IAAI,CAAC,IAAI,CAAC,CAAC,CACpB,aAAa,CAAE,IAAI,AACvB,CAAC,AACD,OAAO,CAAC,IAAI,CAAC,eAAC,CAAC,AACX,OAAO,CAAE,IAAI,AACjB,CAAC,AAED,OAAO,CAAC,IAAI,gBAAC,CAAC,OAAO,eAAC,CAAC,AACnB,aAAa,CAAE,GAAG,CAAC,KAAK,CAAC,IAAI,CAC7B,aAAa,CAAE,IAAI,AACvB,CAAC,AAED,OAAO,CAAC,IAAI,gBAAC,CAAC,CAAC,eAAC,CAAC,AACb,OAAO,CAAE,GAAG,CAAC,IAAI,AACrB,CAAC,AAED,OAAO,eAAC,CAAC,AACL,WAAW,CAAE,IAAI,CACjB,MAAM,CAAE,KAAK,CAAC,KAAK,CAAC,CAAC,CACrB,OAAO,CAAE,IAAI,AACjB,CAAC"
+}
