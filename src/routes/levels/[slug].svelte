@@ -34,11 +34,12 @@
     display: grid;
 		/* width: 80vmin;
 		height: 80vmin; */
+		/* margin-top: -16px; */
     grid-template-areas: "header header header"
     "main main main"
     "footer footer footer";
     grid-template-columns: 0px auto 0px;
-    grid-template-rows:4em auto 5em;
+    grid-template-rows:0em auto 5em;
   }
 
   .header {
@@ -66,6 +67,6 @@
 	<!-- <h3 class="header">{level.name}</h3> -->
 	<Sokoban {level} {mapGrid}/>
 	{#if level.next != undefined}
-		<div class="footer my-5 mx-auto"><a rel="prefetch" href="levels/{level.next}"><button class="p-2 bg-black text-white">Next Level</button></a></div>
+		<div class="footer my-5 mx-auto"><a rel="prefetch" href="levels/{level.next}"><button class="p-2 button">Next Level</button></a></div>
 	{/if}
 </div>

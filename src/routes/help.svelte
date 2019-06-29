@@ -46,9 +46,9 @@ summary {
 </svelte:head>
 
 <h1>Help</h1>
-
-<details open><summary>Game Objective</summary>
+<article class="brightness-120">
+<details class="blur-background" open><summary>Game Objective</summary>
 <p>Push the crates to the marked spots.</p></details>
-<details><summary>Controls</summary>
+<details class="blur-background"><summary>Controls</summary>
 <span><small><strong>Movement:</strong></small><p>Arrow keys.</p></span></details>
-
+</article>

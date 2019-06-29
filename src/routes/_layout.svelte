@@ -13,7 +13,7 @@
 		/* padding-left: 3em; */
 		/* padding-right: 3em; */
 		/* margin: 0 auto; */
-		margin: 0 auto;
+		/* margin: 0 auto; */
 		box-sizing: border-box;
 	}
 </style>

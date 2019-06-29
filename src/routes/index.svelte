@@ -56,7 +56,7 @@
 
 	td,
 	th {
-		border: 1px solid rgb(100, 100, 100);
+		border: thin solid rgb(100, 100, 100);
 		padding: 10px 10px;
 	}
 
@@ -65,13 +65,13 @@
 	}
 
 	td a {
-		color: rgb(11, 71, 68);
+		/* color: rgb(11, 71, 68); */
 		font-weight: 500;
 	}
 
 
 	figure {
-    border: thin #c0c0c0 solid;
+    /* border: thin #c0c0c0 solid; */
     display: flex;
     flex-flow: column;
     padding: 5px;
@@ -79,14 +79,9 @@
     margin: auto;
 }
 
-img {
-    max-width: 300px;
-    max-height: 150px;
-}
-
 figcaption {
     background-color: #222;
-    color: #fff;
+    /* color: #fff; */
 		font: italic smaller sans-serif;
 		font-size: 1rem;
     padding: 3px;

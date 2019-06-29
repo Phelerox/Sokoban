@@ -145,7 +145,7 @@ function TryMove(direction) {
       // console.log("Moving!")
       player.moves++;
       playerReady = false;
-      let animationWait = setTimeout(setPlayerReady, 300);
+      let animationWait = setTimeout(setPlayerReady, 250);
       // grid.get(player.position.row, player.position.column).key = player.standingOn.floorKey;
       if (result.targetTile.key === crate.key) {
         const reachedGoalTile = result.beyondTargetTile.key === goal.key;
@@ -160,6 +160,8 @@ function TryMove(direction) {
       player.position = result.targetCoordinates;
       map = map; //tells Svelte the map grid changed, since set() hides this from Svelte. Svelte would however pick up grid[index] = player.key
     } else {
+      playerReady = false;
+      let animationWait = setTimeout(setPlayerReady, 250);
       console.log("Can't go in that direction!")
     }
     player.tile = player.tile;
@@ -197,11 +199,14 @@ let playerReady = true;
 // }
 
 const backgroundSubareas = [];
-$:  for(let i=0;i<backgroundSubareas.length;i++) {
+
+const calculateGoalOffsets = function(onresize) {
+  for(let i=0;i<backgroundSubareas.length;i++) {
       const {location, overlay} = backgroundSubareas[i];
       overlay.style.setProperty("--offset-left", location.offsetLeft + "px")
       overlay.style.setProperty("--offset-top", location.offsetTop + "px");
     }
+}
 
 onMount(async () => {
   const goalBackgroundElement = document.createElement("div");
@@ -210,8 +215,7 @@ onMount(async () => {
   goalBackgroundElement.appendChild(goalBackgroundImage);
   goalBackgroundElement.classList.add("background-subarea");
   const goalElements = document.getElementsByClassName("goal");
-  const goalElemBgPairs = [];
-  for(let i=0;i<goalElements.length;i++) {
+  for(let i=0; i<goalElements.length; i++) {
     const goalElem = goalElements[i];
     let newElem = goalBackgroundElement;
     if (i < goalElements.length - 1) {
@@ -222,10 +226,9 @@ onMount(async () => {
     goalElem.parentElement.insertBefore(newElem, goalElem);
     newElem.style.setProperty("left", "var(--offset-left)");
     newElem.style.setProperty("top", "var(--offset-top)");
-    goalElemBgPairs.push({location: goalElem, overlay: newElem});
+    backgroundSubareas.push({location: goalElem, overlay: newElem});
   }
-  backgroundSubareas.concat(goalElemBgPairs);
-  
+  window.onresize = calculateGoalOffsets;
   const module = await import('hotkeys-js');
   hotkeys('left, right, up, down',  //this would break server-side rendering if outside of onMount, due to reliance on 'document'.
   'ready', function(event, handler) {
@@ -255,22 +258,13 @@ onMount(async () => {
 });
 
 
-//let highest_tile_index = Math.abs([...[...map].pop()].pop().id);
-
-// let tileWidth = 0, tileHeight = 0;
-// function calcRowId(row) {
-//   const id = row.reduce((accumulator, tile, index) => {return accumulator + ((index + 1) * tile.id)}, 0);
-//   return id;
-// }
-
-
 function whizz(node, { from, to }, params) {
   const dx = from.left - to.left;
   const dy = from.top - to.top;
 
   const d = Math.sqrt(dx * dx + dy * dy);
 
-  const rotation = dx < 0 ? 360 : -360;
+  const rotation = Math.abs(dy) > 14 ? 0 : dx < 0 ? 360 : -360;
 
   return {
     delay: 0,
@@ -319,34 +313,9 @@ const animations = function() {
 }
 
 #sokoban {
-  margin: 1vmin auto;
-  padding: 1vmin;
-  width: var(--width);
-  height: var(--height);
-}
-
-.gaveuponthis.goal:after { /*  */
-  content: "";
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* max-height: attr(height);
-  max-width: attr(width); */
-  height: var(--tile-height);
-  width: var(--tile-width);/*calc(var(--width) / var(--columns));*/
-  z-index: 1;
-  /*transform: none; it took me way too long to get this idea. */
-  /*CSS transitions*/
-  transition-property: none !important;
-  /*CSS transforms*/
-  transform: none !important;
-  /*CSS animations*/
-  animation: none !important;
-  /*flex-item:*/
-  background-image: var(--goal-background);
-  /* background-size: auto 100%; */
-  background-size: var(--tile-height) var(--tile-width)
+  margin: 0 auto;
+  padding: 0;
+  max-width: 100%;
 }
 
 :global(.background-subarea) {
@@ -372,46 +341,6 @@ const animations = function() {
   :global(.background-subarea > img) {
     object-fit: contain;
   }
-/* .goal[style*="animation"] {
-  content: "";
-  background-image: none;
-  transition-property: none !important;
-  transform: none !important;
-  animation: none !important;
-} */
-/* .goal {
-  background-image: var(--goal-background);
-  background-size: auto 100%;
-} */
-/* .goal > i {
-  margin: 0px;
-  text-align: center;
-  flex: 0 1 auto;
-  max-width: 128px;
-  min-width: 16px;
-  width: 128px;
-  height: auto;
-}
-.goal > i:before {
-    content:'';
-    float:left;
-    padding-top:100%;
-}
-.goal {
-  display: contents;
-} */
-/* .goal.flex-item[style*="animation"]::before {
-    background-image: url("/sokoban/images/Ground/ground_01_goal.png");
-    background-size: auto 100%;
-    position: relative;
-    z-index: -1;
-    display: inline-block;
-    content: '';
-    width: auto;
-    height: 100%;
-    width: calc(90vmin / 18);
-    height: calc(90vmin / 18);
-} */
 
 .flex-container {
   padding: 0;
@@ -422,9 +351,9 @@ const animations = function() {
   flex-wrap: wrap;
   justify-content: center;
   width: var(--width);
+  /* height: var(--height); */
   /* line-height:30px; */
 }
-
 div.flex-item > img {
   /* position: absolute; */
   object-fit: cover;
@@ -435,13 +364,13 @@ div.flex-item {
     /* flex: 0 1 auto; */
     flex: 0 0 var(--tile-width);
     width: var(--tile-width);
-    height: auto;
+    height: var(--tile-width);
     z-index: 2;
 }
 /* div.flex-item:before {
     content:'';
     float:left;
-    padding-top:100%;
+    padding-top: var(--ratio);
 } */
 #gameView {
   z-index: 0;
@@ -452,17 +381,13 @@ div.flex-item {
 
 </style>
 
-
-
-
 <!-- <svelte:window on:keyup|preventDefault={handleInput}/> -->
 <figure id="sokoban" style="
   --columns: {columns};
   --rows: {rowIndex};
-  --ratio: {columns / rowIndex};
-  --width: 98vmin;
+  --ratio: calc(var(--columns) / var(--rows));
+  --width: calc(100vmin - 0em);
   --tile-width: calc(var(--width) / var(--columns));
-  --height: calc(var(--width) * var(--ratio));
   --goal-background: url(/{tileTypeDict[goal.key].image});
   --floor-background: url(/{tileTypeDict[blank.key].image});
   ">
@@ -471,7 +396,7 @@ div.flex-item {
 <!-- {#each {length: highest_tile_index} as tile, i} -->
   <!-- <div class="flex-container" > -->
 {#each tileArray as tile (tile.id)}
-<div class="flex-item {extraClassesFor(tile)}" animate:whizz="{{duration: 200, easing: quintOut}}"
+<div class="flex-item {extraClassesFor(tile)}" animate:whizz="{{duration: 150, easing: quintOut}}"
   on:animationstart={animations.starting(tile)} on:animationend={animations.ending(tile)} on:animationcancel={animations.canceled(tile)}>
   <!-- bind:clientWidth={tileWidth} bind:clientHeight={tileHeight} -->
   {#if tile.image && tile.key === player.key}
@@ -481,11 +406,7 @@ div.flex-item {
     <img src="{tile.image}" style={extraStylesFor(tile)} alt="{tile.key}"
       class="id-{tile.id} tile-index-{tile.index} row-{tile.position.row} column-{tile.position.column}" />
   {/if}
-    <!-- </div> --calc(var())>
-  <!-- {/each} -->
-  <!-- in:receive="{{key: tile.id}}"
-      out:send="{{key: tile.id}}" -->
-  </div>
+</div>
 {:else}
   <div class="flex-container">
 	  <p class="flex-item">No mapGrid provided!</p>

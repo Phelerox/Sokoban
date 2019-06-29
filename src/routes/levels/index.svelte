@@ -12,8 +12,15 @@
 
 <style>
 	ul {
-		margin: 0 0 1em 0;
+		margin: 0 auto;
 		line-height: 1.5;
+	}
+	ul > * {
+		width: auto;
+		text-align: center;
+	}
+	article {
+		margin: 0 auto;
 	}
 </style>
 
@@ -23,6 +30,7 @@
 
 <h1>Levels</h1>
 
+<article>
 <ul>
 	{#each levels as level}
 		<!-- we're using the non-standard `rel=prefetch` attribute to
@@ -32,3 +40,4 @@
 		<li><a rel='prefetch' href='levels/{level.slug}'>{level.title}</a></li>
 	{/each}
 </ul>
+</article>
